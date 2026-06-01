@@ -1,0 +1,506 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gold:       #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim:   #7a6130;
+  --blood:      #8b1a1a;
+  --parchment:  #f5e6c8;
+  --ash:        #c8bfb0;
+  --ink:        #0a0705;
+  --white-mist: rgba(245, 230, 200, 0.88);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html,
+body {
+  background: #000;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar               { width: 4px; }
+::-webkit-scrollbar-track         { background: #000; }
+::-webkit-scrollbar-thumb         { background: var(--gold-dim); border-radius: 2px; }
+
+/* ── Container ── */
+.got-container {
+  position: relative;
+  width: 100%;
+  height: 700vh;
+}
+
+/* ── Sticky layer ── */
+.got-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;
+}
+
+/* ── Video ── */
+.got-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: auto;
+  filter: contrast(1.06) saturate(1.04) brightness(1.02);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* ── Vignette ── */
+.got-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, 0.68) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Overlay gradient ── */
+.got-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.74) 0%, rgba(0, 0, 0, 0.46) 32%, rgba(0, 0, 0, 0.12) 62%, rgba(0, 0, 0, 0.03) 100%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.14) 44%, rgba(0, 0, 0, 0) 72%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Film grain texture ── */
+.got-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  display: none;
+}
+
+/* ── Top nav bar ── */
+.got-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 48px;
+}
+
+.got-nav-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.got-nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.got-nav-links li a {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--ash);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.got-nav-links li a:hover {
+  color: var(--gold-light);
+}
+
+/* ── Decorative divider ── */
+.got-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.got-divider-line {
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim));
+}
+
+.got-divider-line.right {
+  background: linear-gradient(to left, transparent, var(--gold-dim));
+}
+
+.got-divider-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+/* ── Content area ── */
+.got-content {
+  position: absolute;
+  --content-left: clamp(28px, 5vw, 88px);
+  bottom: clamp(54px, 7.5vh, 88px);
+  left: var(--content-left);
+  right: auto;
+  z-index: 10;
+  width: min(700px, calc(100vw - var(--content-left) - 140px));
+  max-width: none;
+  padding: 0;
+  overflow: visible;
+}
+
+.got-sigil {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.6));
+  color: var(--gold);
+}
+
+.got-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.got-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(36px, 4.6vw, 72px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--parchment);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.9), 0 0 80px rgba(201, 168, 76, 0.15);
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+  max-width: 100%;
+  text-wrap: balance;
+}
+
+.got-body {
+  font-family: 'IM Fell English', serif;
+  font-size: clamp(14px, 1.5vw, 17px);
+  line-height: 1.75;
+  color: var(--ash);
+  max-width: 480px;
+  font-style: italic;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ── CTA buttons ── */
+.got-cta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 22px;
+  margin-top: 36px;
+  max-width: 100%;
+}
+
+.got-cta-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold);
+  border: none;
+  padding: 14px 32px;
+  max-width: 100%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s, color 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.got-cta-btn:hover {
+  background: var(--gold-light);
+}
+
+.got-cta-ghost {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid var(--gold-dim);
+  padding: 13px 28px;
+  max-width: 100%;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.got-cta-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+/* ── Right side vertical panel ── */
+.got-right-panel {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.got-chapter-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.got-vert-line {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+}
+
+/* ── Chapter progress dots ── */
+.got-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.got-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  transition: background 0.4s, transform 0.4s;
+  cursor: default;
+}
+
+.got-dot.active {
+  background: var(--gold);
+  transform: scale(1.8);
+}
+
+/* ── Bottom progress bar ── */
+.got-progress-bar-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(201, 168, 76, 0.12);
+  z-index: 20;
+}
+
+.got-progress-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, var(--gold-dim), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: none;
+  will-change: transform;
+  box-shadow: 0 0 10px var(--gold);
+}
+
+/* ── Rune / tick bar (decorative, below nav) ── */
+.got-rune-bar {
+  position: absolute;
+  top: 88px;
+  left: 48px;
+  right: 48px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  height: 2px;
+  opacity: 0.48;
+}
+
+.rune-tick {
+  flex: 1;
+  height: 100%;
+  background: var(--gold-dim);
+  transform-origin: bottom;
+  opacity: 0;
+}
+
+.rune-tick:nth-child(3n) {
+  height: 4px;
+  background: var(--gold);
+}
+
+.rune-tick:nth-child(7n) {
+  height: 3px;
+}
+
+/* ── Scroll hint ── */
+.got-scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  right: 48px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.55;
+  animation: hint-fade 2.5s ease-in-out infinite;
+}
+
+.got-scroll-hint span {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.got-scroll-hint .arrow {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: arrow-drop 2.5s ease-in-out infinite;
+}
+
+@keyframes hint-fade {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.75; }
+}
+
+@keyframes arrow-drop {
+  0%   { transform: translateY(-6px); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { transform: translateY(6px);  opacity: 0; }
+}
+
+/* ── Corner ornaments ── */
+.got-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.got-corner svg       { width: 100%; height: 100%; }
+.got-corner-tl        { top: 24px; left: 24px; }
+.got-corner-tr        { top: 24px; right: 24px; transform: scaleX(-1); }
+.got-corner-bl        { bottom: 24px; left: 24px; transform: scaleY(-1); }
+.got-corner-br        { bottom: 24px; right: 24px; transform: scale(-1); }
+
+/* ── Loading screen ── */
+.got-loading {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.got-loading.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.got-loading-logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+.got-loading-sub {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.6em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+.got-loading-bar-wrap {
+  width: 160px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.got-loading-bar-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  animation: load-fill 2s ease forwards;
+}
+
+@keyframes load-fill {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .got-content        {
+    --content-left: 28px;
+    bottom: 76px;
+    width: calc(100vw - 56px);
+  }
+  .got-nav            { padding: 20px 28px; }
+  .got-nav-links      { display: none; }
+  .got-right-panel    { right: 20px; }
+  .got-scroll-hint    { display: none; }
+  .got-rune-bar       { left: 28px; right: 28px; }
+  .got-corner         { display: none; }
+  .got-title          { font-size: clamp(30px, 11vw, 44px); }
+  .got-cta-row        { gap: 12px; }
+  .got-cta-btn,
+  .got-cta-ghost      { width: 100%; }
+}
